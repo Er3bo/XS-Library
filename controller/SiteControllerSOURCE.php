@@ -6,7 +6,7 @@
  * Time: 10:49 PM
  */
 
-class SiteController extends Controller
+class SiteControllerSOURCE extends Controller
 {
     public $model;
 

@@ -10,13 +10,13 @@ class RouterManager{
         $this->request = $request;
 
         if($this->request['controller'] == ''){
-            $this->controller = 'home';
+            $this->controller = 'IndexController';
         } else {
             $this->controller = $this->request['controller'];
         }
 
         if($this->request['action'] == ''){
-            $this->action = 'index';
+            $this->action = 'actionIndex';
         } else {
             $this->action = $this->request['action'];
         }

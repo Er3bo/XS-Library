@@ -19,7 +19,7 @@
 //    }
 //});
 //$db = Connection::connect($config);
-//$loadNew = new SiteController();
+//$loadNew = new SiteControllerSOURCE();
 //$model = new SiteModel();
 //$loadNew->model=$model;
 //$model->db = $db;
