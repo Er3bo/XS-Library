@@ -7,18 +7,16 @@
  */
 
 class Model{
-    public static $connection = false;
+    protected $db = false;
 
-    private function  __construct($config){
+    protected function  __construct($config){
         try{
-            if(!self::$connection){
+            if(!$this->db){
                 $con = new PDO("mysql:host={$config['server']};dbname={$config['dbname']}",
                     $config['dbuser'],$config['dbpass']);
                 $con->setAttribute(\PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $con->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-                self::$connection = $con;
-
-                return self::$connection;
+                $this->db = $con;
             }
         }
         catch (PDOException $e){

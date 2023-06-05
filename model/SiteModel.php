@@ -7,10 +7,8 @@
  */
 
 
-class SiteModel
+class SiteModel extends Model
 {
-    public $db;
-
     public function CheckUserLogin($email, $password)
     {
         $query = "SELECT * FROM user WHERE email=:email";
