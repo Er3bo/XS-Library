@@ -1,11 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Er3b
- * Date: 04-May-23
- * Time: 11:57 PM
- */
+session_start();
+require('config.php');
 
-include_once 'kernel.php';
+require('model/Model.php');
+
+require('controller/Controller.php');
+
+$bootstrap = new RouterManager($_GET); // Get all url parameters
+$controller = $bootstrap->createController();
+
+if($controller){
+    $controller->executeAction();
+}
 
 ?>

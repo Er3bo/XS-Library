@@ -6,14 +6,10 @@
  * Time: 8:14 PM
  */
 
-
-class Connection{
+class Model{
     public static $connection = false;
 
-    private function  __construct(){
-
-    }
-    public static function connect($config){
+    private function  __construct($config){
         try{
             if(!self::$connection){
                 $con = new PDO("mysql:host={$config['server']};dbname={$config['dbname']}",
