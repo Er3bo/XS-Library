@@ -1,6 +1,6 @@
 <?php
 
- class Controller
+abstract class Controller
  {
     protected $request;
     protected $action;
@@ -14,9 +14,11 @@
         return $this->{$this->action}();
     }
 
-    protected function runThis($viewmodel) {
-        $view = 'view/' . get_class($this) . '/' . $this->action . '.php';
-        require($view);
+    protected function runThis($view, $data = false) {
+        if ($data) {
+            extract($data);
+        }
+        require('view/'.$view);
     }
 }
 ?>

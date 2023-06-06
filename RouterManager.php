@@ -8,24 +8,19 @@ class RouterManager
 
     public function __construct($request)
     {
-        $this->request = $request;
-
-        var_dump($request, 'blablabla');
-        die();
-        if ($this->request['controller'] == '') {
-            $this->controller = 'IndexController';
-        } else {
-            $this->controller = $this->request['controller'];
-        }
-
-        if ($this->request['action'] == '') {
-            $this->action = 'Index';
-        } else {
-            $this->action = $this->request['action'];
+        $routes = require ('routes.php');
+        foreach ($routes as $requestUrl => $routeTo) {
+            if ($requestUrl == $request)
+            {
+                $finalRoute = explode('@',$routeTo);
+                $this->controller = reset($finalRoute);
+                $this->action = end($finalRoute);
+            }
         }
     }
 
-    public function createController(){
+    public function createController()
+    {
         // Check Class
         if (class_exists($this->controller)) {
             $parents = class_parents($this->controller);

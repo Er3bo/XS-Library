@@ -6,13 +6,13 @@
  * Time: 8:14 PM
  */
 
-class Model{
+abstract class Model{
     protected $db = false;
 
     public function  __construct() {
         try {
-            $config = require_once('config.php');
-            if(!$this->db && $config){
+            $config = include('config.php');
+            if (!$this->db) {
                 $con = new PDO("mysql:host={$config['server']};dbname={$config['dbname']}",
                     $config['dbuser'],$config['dbpass']);
                 $con->setAttribute(\PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

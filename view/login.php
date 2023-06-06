@@ -10,7 +10,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Login 10</title>
+    <title>XSSoft Library</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
@@ -34,7 +34,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="login-wrap p-0">
                     <h3 class="mb-4 text-center">Have an account?</h3>
-                    <form action="#" class="signin-form" method="post" action="">
+                    <form action="" class="signin-form" method="post">
                         <div class="form-group">
                             <input type="email" name="email" class="form-control" placeholder="Email" required>
                         </div>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="form-group d-md-flex">
                             <div class="w-50">
-                                <a href="?register=true" style="color: #fff">Sign Up</a>
+                                <a href="?register" style="color: #fff">Sign Up</a>
                             </div>
                             <div class="w-50 text-md-right">
                                 <a href="?forgot" style="color: #fff">Forgot Password</a>
