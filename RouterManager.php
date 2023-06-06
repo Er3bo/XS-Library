@@ -10,6 +10,8 @@ class RouterManager
     {
         $this->request = $request;
 
+        var_dump($request, 'blablabla');
+        die();
         if ($this->request['controller'] == '') {
             $this->controller = 'IndexController';
         } else {

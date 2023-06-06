@@ -262,10 +262,10 @@ class SiteModelSOURCE extends Model
         if (strlen($isbn) == 10) {
             $sum = 0;
             for ($i = 0; $i < 9; $i++) {
-                $sum += (10 - $i) * intval($isbn{$i});
+                $sum += (10 - $i) * intval($isbn[$i]);
             }
             $checkDigit = (11 - ($sum % 11)) % 11;
-            if ($checkDigit != intval($isbn{9})) {
+            if ($checkDigit != intval($isbn[9])) {
                 return false;
             }
         }
@@ -274,10 +274,10 @@ class SiteModelSOURCE extends Model
         if (strlen($isbn) == 13) {
             $sum = 0;
             for ($i = 0; $i < 12; $i++) {
-                $sum += (($i % 2) * 2 + 1) * intval($isbn{$i});
+                $sum += (($i % 2) * 2 + 1) * intval($isbn[$i]);
             }
             $checkDigit = (10 - ($sum % 10)) % 10;
-            if ($checkDigit != intval($isbn{12})) {
+            if ($checkDigit != intval($isbn[12])) {
                 return false;
             }
         }
