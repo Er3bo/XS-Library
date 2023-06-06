@@ -80,18 +80,18 @@ class SiteControllerSOURCE extends Controller
             unset($_SESSION['userLogInStatus']);
         }
 
-        if (isset($_POST['LoginSubmit'])) {
-            $email = trim($_POST['email']);
-            $password = trim($_POST['password']);
-
-            $checkLogin = $this->model->CheckUserLogin($email, $password);
-            if ($checkLogin) {
-
-                $_SESSION['userLogInStatus'] = 1;
-            }
-            else if (!isset($_SESSION['message']))
-                $_SESSION['message'] = 'Incorrect Email or password!';
-        }
+//        if (isset($_POST['LoginSubmit'])) {
+//            $email = trim($_POST['email']);
+//            $password = trim($_POST['password']);
+//
+//            $checkLogin = $this->model->CheckUserLogin($email, $password);
+//            if ($checkLogin) {
+//
+//                $_SESSION['userLogInStatus'] = 1;
+//            }
+//            else if (!isset($_SESSION['message']))
+//                $_SESSION['message'] = 'Incorrect Email or password!';
+//        }
 
         if (isset($_POST['ForgotSubmit'])) {
             $email = trim($_POST['email']);

@@ -7,7 +7,7 @@
  */
 
 
-class SiteModel extends Model
+class SiteModelSOURCE extends Model
 {
     public function CheckUserLogin($email, $password)
     {

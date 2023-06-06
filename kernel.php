@@ -20,7 +20,7 @@
 //});
 //$db = Connection::connect($config);
 //$loadNew = new SiteControllerSOURCE();
-//$model = new SiteModel();
+//$model = new SiteModelSOURCE();
 //$loadNew->model=$model;
 //$model->db = $db;
 //

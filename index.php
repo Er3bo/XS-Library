@@ -7,7 +7,7 @@ require('model/Model.php');
 require('model/BookShelfModel.php');
 require('model/FavoriteBooksModel.php');
 require('model/UserModel.php');
-require('model/SiteModel.php');
+require('model/SiteModelSOURCE.php');
 
 require('controller/Controller.php');
 require('controller/BookShelfController.php');
@@ -15,10 +15,10 @@ require('controller/FavoriteBookController.php');
 require('controller/UserController.php');
 require('controller/SiteControllerSOURCE.php');
 
-$bootstrap = new RouterManager($_GET); // Get all url parameters
-$controller = $bootstrap->createController();
+$route = new RouterManager($_GET); // Get all url parameters
+$controller = $route->createController();
 
-if($controller){
+if ($controller) {
     $controller->executeAction();
 }
 
