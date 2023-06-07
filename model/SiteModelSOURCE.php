@@ -35,49 +35,19 @@ class SiteModelSOURCE extends Model
 //        } else
 //            return false;
 //    }
-    public function takeUserData($id){
-        $query = "SELECT * FROM user WHERE id=:id";
-        $stmt = $this->db->prepare($query);
-        $stmt->execute(['id' => $id]);
-        $userData = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $userData;
-    }
+//    public function takeUserData($id){
+//        $query = "SELECT * FROM user WHERE id=:id";
+//        $stmt = $this->db->prepare($query);
+//        $stmt->execute(['id' => $id]);
+//        $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+//        return $userData;
+//    }
 
-    public function updateUserData($firstName,$lastName,$email, $password, $passwordConfirm){
-        $user = $_SESSION['user_id'];
 
-        if ($password == $passwordConfirm) {
-            $hashedPass = password_hash($password, PASSWORD_DEFAULT);
-            $queryUpdate = "UPDATE user SET first_name = :first_name, last_name = :last_name, email = :email, password = :password WHERE id = :id";
-            $stmt = $this->db->prepare($queryUpdate);
-            $stmt->bindParam(':first_name', $firstName);
-            $stmt->bindParam(':last_name', $lastName);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':password', $hashedPass);
-            $stmt->bindParam(':id', $user);
-            $stmt->execute();
-            return true;
-        }
-        else
-            return false;
-    }
 
-    public function notActiveUsers()
-    {
-        $query = "SELECT * FROM user WHERE active=0";
-        $stmt = $this->db->prepare($query);
-        $stmt->execute();
-        $userData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $userData;
-    }
 
-    public function updateUserStatus($user_id)
-    {
-        $query = "UPDATE user SET active = '1' WHERE id = :id";
-        $stmt = $this->db->prepare($query);
-        $stmt->execute(['id' => $user_id]);
-        return true;
-    }
+
+
 
 //    public function ForgottenPass($email, $password, $passwordConfirm)
 //    {

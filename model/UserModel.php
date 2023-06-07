@@ -17,7 +17,7 @@ class UserModel extends Model
                 $_SESSION['user_id'] = $userData['id'];
                 var_dump('test');
                 return true;
-            } else if($userData['active'] == 0) {
+            } else if ($userData['active'] == 0) {
                 $_SESSION['message'] = 'Account is not approved by admin';
                 return false;
             } else {
@@ -68,9 +68,39 @@ class UserModel extends Model
                 $stmt->bindParam(':id', $userData['id']);
                 $stmt->execute();
                 return true;
-            } else
+            } else {
                 return false;
+            }
         }
         return false;
+    }
+
+    public function takeUserData($id)
+    {
+        $query = "SELECT * FROM user WHERE id=:id";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute(['id' => $id]);
+        $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $userData;
+    }
+
+    public function updateUserData($firstName,$lastName,$email, $password, $passwordConfirm)
+    {
+        $user = $_SESSION['user_id'];
+
+        if ($password == $passwordConfirm) {
+            $hashedPass = password_hash($password, PASSWORD_DEFAULT);
+            $queryUpdate = "UPDATE user SET first_name = :first_name, last_name = :last_name, email = :email, password = :password WHERE id = :id";
+            $stmt = $this->db->prepare($queryUpdate);
+            $stmt->bindParam(':first_name', $firstName);
+            $stmt->bindParam(':last_name', $lastName);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':password', $hashedPass);
+            $stmt->bindParam(':id', $user);
+            $stmt->execute();
+            return true;
+        } else {
+            return false;
+        }
     }
 }
