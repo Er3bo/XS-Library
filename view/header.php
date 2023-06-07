@@ -6,6 +6,7 @@
  * Time: 12:32 AM
  */
 ?>
+<title>XSSoft Library</title>
 
 <nav class="nav border-bottom nav-stacked" style="background-color: white;">
     <a class="nav-link active" href="?dashboard">Library</a>

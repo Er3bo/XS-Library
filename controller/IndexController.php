@@ -11,4 +11,10 @@ class IndexController extends Controller
     {
         $this->runThis('login.php');
     }
+
+    protected function LogOut()
+    {
+        unset($_SESSION['userLogInStatus']);
+        $this->runThis('login.php');
+    }
 }

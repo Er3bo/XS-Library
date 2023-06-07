@@ -12,4 +12,13 @@ class BookShelfModel extends Model {
         }
         return $books;
     }
+
+    public function getSingleBook($id)
+    {
+        $query = "SELECT * FROM books WHERE id=:id";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute(['id' => $id]);
+        $book = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $book;
+    }
 }

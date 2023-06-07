@@ -76,9 +76,9 @@ class SiteControllerSOURCE extends Controller
 
     public function actionIndex()
     {
-        if (isset($_GET['logOut'])) {
-            unset($_SESSION['userLogInStatus']);
-        }
+//        if (isset($_GET['logOut'])) {
+//            unset($_SESSION['userLogInStatus']);
+//        }
 
 //        if (isset($_POST['LoginSubmit'])) {
 //            $email = trim($_POST['email']);
@@ -93,64 +93,64 @@ class SiteControllerSOURCE extends Controller
 //                $_SESSION['message'] = 'Incorrect Email or password!';
 //        }
 
-        if (isset($_POST['ForgotSubmit'])) {
-            $email = trim($_POST['email']);
-            $password = trim($_POST['password']);
-            $passwordConfirm = trim($_POST['passwordConfirm']);
+//        if (isset($_POST['ForgotSubmit'])) {
+//            $email = trim($_POST['email']);
+//            $password = trim($_POST['password']);
+//            $passwordConfirm = trim($_POST['passwordConfirm']);
+//
+//            $saveNewPass = $this->model->ForgottenPass($email, $password, $passwordConfirm);
+//            if ($saveNewPass) {
+//                $_SESSION['message'] = 'Password has been changed successfully.';
+//                if (isset($_GET['forgot'])) {
+//                    unset($_GET['forgot']);
+//                    $_GET['login'] = '';
+//                }
+//            } else
+//                $_SESSION['message'] = 'Incorrect Email or Passwords doesnt match!';
+//        }
+//        if (isset($_POST['editUser'])) {
+//            $firstName = trim($_POST['first_name']);
+//            $lastName = trim($_POST['last_name']);
+//            $email = trim($_POST['email']);
+//            $password = trim($_POST['password']);
+//            $passwordConfirm = trim($_POST['password_confirm']);
+//
+//            $saveNewData = $this->model->updateUserData($firstName,$lastName,$email, $password, $passwordConfirm);
+//            if (!$saveNewData)
+//                $_SESSION['message'] = 'Passwords doesn\'t match';
+//        }
+//
+//        if (isset($_POST['RegisterSubmit'])) {
+//            $email = trim($_POST['email']);
+//            $password = trim($_POST['password']);
+//            $firstName = trim($_POST['firstName']);
+//            $lastName = trim($_POST['lastName']);
+//
+//            $userReg = $this->model->UserRegister($email, password_hash($password, PASSWORD_DEFAULT), $firstName, $lastName);
+//            if ($userReg) {
+//                $checkLogin = $this->model->CheckUserLogin($email, $password);
+//                if ($checkLogin)
+//                    $_SESSION['userLogInStatus'] = 1;
+//                else {
+//                    $_SESSION['message'] = 'Your account is successfully created. <br> Now it has to be approved by Admin.';
+//                }
+//            } else
+//                $_SESSION['message'] = 'Your Email is already registered.';
+//        }
 
-            $saveNewPass = $this->model->ForgottenPass($email, $password, $passwordConfirm);
-            if ($saveNewPass) {
-                $_SESSION['message'] = 'Password has been changed successfully.';
-                if (isset($_GET['forgot'])) {
-                    unset($_GET['forgot']);
-                    $_GET['login'] = '';
-                }
-            } else
-                $_SESSION['message'] = 'Incorrect Email or Passwords doesnt match!';
-        }
-        if (isset($_POST['editUser'])) {
-            $firstName = trim($_POST['first_name']);
-            $lastName = trim($_POST['last_name']);
-            $email = trim($_POST['email']);
-            $password = trim($_POST['password']);
-            $passwordConfirm = trim($_POST['password_confirm']);
-
-            $saveNewData = $this->model->updateUserData($firstName,$lastName,$email, $password, $passwordConfirm);
-            if (!$saveNewData)
-                $_SESSION['message'] = 'Passwords doesn\'t match';
-        }
-
-        if (isset($_POST['RegisterSubmit'])) {
-            $email = trim($_POST['email']);
-            $password = trim($_POST['password']);
-            $firstName = trim($_POST['firstName']);
-            $lastName = trim($_POST['lastName']);
-
-            $userReg = $this->model->UserRegister($email, password_hash($password, PASSWORD_DEFAULT), $firstName, $lastName);
-            if ($userReg) {
-                $checkLogin = $this->model->CheckUserLogin($email, $password);
-                if ($checkLogin)
-                    $_SESSION['userLogInStatus'] = 1;
-                else {
-                    $_SESSION['message'] = 'Your account is successfully created. <br> Now it has to be approved by Admin.';
-                }
-            } else
-                $_SESSION['message'] = 'Your Email is already registered.';
-        }
-
-        if (isset($_POST['user_id']))
-        {
-            $user_id = $_POST['user_id'];
-
-            $update= $this->model->updateUserStatus($user_id);
-
-            if ($update) {
-                header('Location: http://localhost/XSSoft/?users');
-                exit;
-            }
-            else
-                $_SESSION['message'] = 'Couldn\'t update status';
-        }
+//        if (isset($_POST['user_id']))
+//        {
+//            $user_id = $_POST['user_id'];
+//
+//            $update= $this->model->updateUserStatus($user_id);
+//
+//            if ($update) {
+//                header('Location: http://localhost/XSSoft/?users');
+//                exit;
+//            }
+//            else
+//                $_SESSION['message'] = 'Couldn\'t update status';
+//        }
         if (isset($_POST['remove_favorite']))
         {
             $book_remove = $_POST['remove_favorite'];
@@ -167,32 +167,32 @@ class SiteControllerSOURCE extends Controller
 
         if (isset($_POST['editBook']))
         {
-            $id = $_POST['book_create'];
-            $title = trim($_POST['title']);
-            $isbn = trim($_POST['isbn']);
-            $description = trim($_POST['description']);
-            $image = trim($_FILES['image']['name']);
-            $validIsbn = $this->model->validateISBN($isbn);
-            if ($validIsbn) {
-                $target_dir = "images/";
-                $target_file = $target_dir . basename($_FILES["image"]["name"]);
-                $uploadOk = 1;
-                if(isset($_POST["editBook"])) {
-                    $check = getimagesize($_FILES["image"]["tmp_name"]);
-                    if($check !== false)
-                        $uploadOk = 1;
-                        else
-                        $uploadOk = 0;
-                    if ($uploadOk)
-                    {
-                        move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
-                    }
-
-                }
-                $update = $this->model->updateBook($id, $title, $isbn, $description,$image);
-            }
-            else
-                $_SESSION['message'] = 'Please enter a valid ISBN for the book.';
+//            $id = $_POST['book_create'];
+//            $title = trim($_POST['title']);
+//            $isbn = trim($_POST['isbn']);
+//            $description = trim($_POST['description']);
+//            $image = trim($_FILES['image']['name']);
+//            $validIsbn = $this->model->validateISBN($isbn);
+//            if ($validIsbn) {
+//                $target_dir = "images/";
+//                $target_file = $target_dir . basename($_FILES["image"]["name"]);
+//                $uploadOk = 1;
+//                if(isset($_POST["editBook"])) {
+//                    $check = getimagesize($_FILES["image"]["tmp_name"]);
+//                    if($check !== false)
+//                        $uploadOk = 1;
+//                        else
+//                        $uploadOk = 0;
+//                    if ($uploadOk)
+//                    {
+//                        move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
+//                    }
+//
+//                }
+//                $update = $this->model->updateBook($id, $title, $isbn, $description,$image);
+//            }
+//            else
+//                $_SESSION['message'] = 'Please enter a valid ISBN for the book.';
 
         }
         if (isset($_POST['add-favorite']))

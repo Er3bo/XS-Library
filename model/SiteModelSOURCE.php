@@ -96,40 +96,40 @@ class SiteModelSOURCE extends Model
 
 
 
-    public function getSingleBook($id)
-    {
-        $query = "SELECT * FROM books WHERE id=:id";
-        $stmt = $this->db->prepare($query);
-        $stmt->execute(['id' => $id]);
-        $book = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $book;
-    }
+//    public function getSingleBook($id)
+//    {
+//        $query = "SELECT * FROM books WHERE id=:id";
+//        $stmt = $this->db->prepare($query);
+//        $stmt->execute(['id' => $id]);
+//        $book = $stmt->fetch(PDO::FETCH_ASSOC);
+//        return $book;
+//    }
 
-    public function updateBook($id, $name, $isbn, $description,$image)
-    {
-        if ($id) {
-            $query = "UPDATE books SET name = :name, ISBN = :isbn, description = :descr, image = :image WHERE id = :id;";
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':id', $id);
-            $stmt->bindParam(':name', $name);
-            $stmt->bindParam(':isbn', $isbn);
-            $stmt->bindParam(':descr', $description);
-            $stmt->bindParam(':image', $image);
-            $stmt->execute();
-            return true;
-        } else {
-            $query = "INSERT INTO books (name, isbn, description,image) VALUES (:name, :isbn, :description,:image)";
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':name', $name);
-            $stmt->bindParam(':isbn', $isbn);
-            $stmt->bindParam(':description', $description);
-            $stmt->bindParam(':image', $image);
-
-            $stmt->execute();
-            return true;
-        }
-        return false;
-    }
+//    public function updateBook($id, $name, $isbn, $description,$image)
+//    {
+//        if ($id) {
+//            $query = "UPDATE books SET name = :name, ISBN = :isbn, description = :descr, image = :image WHERE id = :id;";
+//            $stmt = $this->db->prepare($query);
+//            $stmt->bindParam(':id', $id);
+//            $stmt->bindParam(':name', $name);
+//            $stmt->bindParam(':isbn', $isbn);
+//            $stmt->bindParam(':descr', $description);
+//            $stmt->bindParam(':image', $image);
+//            $stmt->execute();
+//            return true;
+//        } else {
+//            $query = "INSERT INTO books (name, isbn, description,image) VALUES (:name, :isbn, :description,:image)";
+//            $stmt = $this->db->prepare($query);
+//            $stmt->bindParam(':name', $name);
+//            $stmt->bindParam(':isbn', $isbn);
+//            $stmt->bindParam(':description', $description);
+//            $stmt->bindParam(':image', $image);
+//
+//            $stmt->execute();
+//            return true;
+//        }
+//        return false;
+//    }
 
     public function getFavoriteBooks($id)
     {

@@ -27,7 +27,7 @@
                     <a href="?book_id=<?= $row['id'] ?>">
                     <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
                          data-mdb-ripple-color="light">
-                        <img src="images/<?= empty($row['image'])? 'no-image.jpg' : $row['image'] ?>" class="mt-2 resize-img" />
+                        <img src="images/<?= empty($row['image']) ? 'no-image.jpg' : $row['image'] ?>" class="mt-2 resize-img" />
                     </div>
                     </a>
                     <div class="card-body d-flex justify-content-center align-items-center">
@@ -36,10 +36,10 @@
                         </a>
                     </div>
                     <div class="card-footer">
-                        <?php if($_SESSION['user_role'] == 'admin'): ?>
+                        <?php if ($_SESSION['user_role'] == 'admin') { ?>
                             <div class="d-flex justify-content-center align-items-center">
                                 <form method="post" action="">
-                                    <input type="hidden" name="book_create" value="<?= $row['id']; ?>">
+                                    <input type="hidden" name="book_edit" value="<?= $row['id']; ?>">
                                     <button class="btn btn-primary mx-2" type="submit">Edit</button>
                                 </form>
                                 <form method="post" action="">
@@ -47,11 +47,11 @@
                                     <button class="btn btn-danger" type="submit">Delete book</button>
                                 </form>
                             </div>
-                        <?php else: ?>
+                        <?php } else { ?>
                             <a href="?book_id=<?= $row['id'] ?>" class="btn btn-primary">
                                 See more
                             </a>
-                        <?php endif; ?>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
