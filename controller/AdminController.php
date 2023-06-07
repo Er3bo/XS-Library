@@ -1,14 +1,14 @@
 <?php
 class AdminController extends Controller
 {
-    protected function UserList()
+    private function UserList()
     {
         $nonActiveUsers = new AdminModel;
         $data = $nonActiveUsers->notActiveUsers();
         $this->runThis('users.php', ['data'=>$data]);
     }
 
-    protected function UserApprove()
+    private function UserApprove()
     {
         $user_id = $_POST['user_id'];
 
@@ -21,7 +21,7 @@ class AdminController extends Controller
         }
     }
 
-    protected function CreateBookForm()
+    private function CreateBookForm()
     {
         $message = '';
         if (isset($_SESSION['message'])) {
@@ -31,7 +31,7 @@ class AdminController extends Controller
         $this->runThis('edit-book.php', ['message' => $message]);
     }
 
-    protected function CreateBookFormSubmit()
+    private function CreateBookFormSubmit()
     {
         $id = $_POST['book_create'];
         $title = trim($_POST['title']);
@@ -70,7 +70,7 @@ class AdminController extends Controller
         }
     }
 
-    protected function EditBookForm()
+    private function EditBookForm()
     {
         $message = '';
         if (isset($_SESSION['message'])) {
@@ -82,7 +82,7 @@ class AdminController extends Controller
         $this->runThis('edit-book.php', ['book' => $book, 'message' => $message]);
     }
 
-    protected function DeleteBook()
+    private function DeleteBook()
     {
         $book = $_POST['book_delete'];
         $model = new AdminModel();

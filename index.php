@@ -24,7 +24,6 @@ if (!$reqUrl) {
     $reqUrl = end($reqUrl);
 }
 var_dump($reqUrl);
-
 $route = new RouterManager($reqUrl);
 $controller = $route->createController();
 

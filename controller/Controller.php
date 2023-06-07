@@ -2,8 +2,8 @@
 
 abstract class Controller
  {
-    protected $request;
-    protected $action;
+    private $request;
+    private $action;
 
     public function __construct($action, $request) {
         $this->action = $action;
@@ -14,10 +14,16 @@ abstract class Controller
         return $this->{$this->action}();
     }
 
-    protected function runThis($view, $data = false) {
-        if ($data) {
-            extract($data);
-        }
+    /**
+     * Returns a view with data
+     *
+     * @param $view
+     * @param array $data
+     *
+     * @return void
+     */
+    protected function runThis($view, array $data = []) {
+        extract($data);
         require('view/'.$view);
     }
 }

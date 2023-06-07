@@ -7,12 +7,12 @@
  */
 class IndexController extends Controller
 {
-    protected function Index()
+    private function Index()
     {
         $this->runThis('login.php');
     }
 
-    protected function LogOut()
+    private function LogOut()
     {
         unset($_SESSION['userLogInStatus']);
         $this->runThis('login.php');

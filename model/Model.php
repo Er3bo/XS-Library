@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Er3b
- * Date: 04-May-23
- * Time: 8:14 PM
- */
-
 abstract class Model{
     protected $db = false;
 
@@ -26,4 +19,3 @@ abstract class Model{
         }
     }
 }
-?>

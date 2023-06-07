@@ -81,10 +81,11 @@ class UserModel extends Model
         $stmt = $this->db->prepare($query);
         $stmt->execute(['id' => $id]);
         $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+
         return $userData;
     }
 
-    public function updateUserData($firstName,$lastName,$email, $password, $passwordConfirm)
+    public function updateUserData(string $firstName, $lastName, $email, $password, $passwordConfirm): bool
     {
         $user = $_SESSION['user_id'];
 
@@ -92,12 +93,15 @@ class UserModel extends Model
             $hashedPass = password_hash($password, PASSWORD_DEFAULT);
             $queryUpdate = "UPDATE user SET first_name = :first_name, last_name = :last_name, email = :email, password = :password WHERE id = :id";
             $stmt = $this->db->prepare($queryUpdate);
+
             $stmt->bindParam(':first_name', $firstName);
             $stmt->bindParam(':last_name', $lastName);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':password', $hashedPass);
             $stmt->bindParam(':id', $user);
+
             $stmt->execute();
+
             return true;
         } else {
             return false;

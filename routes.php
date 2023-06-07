@@ -12,6 +12,8 @@ return $routes = [
     'user_id' => 'AdminController@UserApprove',
     'book_create' => 'AdminController@CreateBookForm',
     'book_edit' => 'AdminController@EditBookForm',
+    'favorite' => 'FavoriteBookController@FavoriteList',
+    'book_id' => 'BookShelfController@SingleBook',
     //POST
     'LoginSubmit' => 'UserController@Login',
     'RegisterSubmit' => 'UserController@Register',
@@ -19,4 +21,6 @@ return $routes = [
     'editUser' => 'UserController@UserEditSubmit',
     'editBook' => 'AdminController@CreateBookFormSubmit',
     'book_delete' => 'AdminController@DeleteBook',
+    'remove_favorite' => 'FavoriteBookController@RemoveFavorite',
+    'add-favorite' => 'FavoriteBookController@AddToFavorite',
 ];

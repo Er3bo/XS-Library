@@ -2,29 +2,31 @@
 
 class UserController extends Controller
 {
-    protected function Index()
+    private function Index()
     {
         $this->runThis('registration.php');
     }
 
-    protected function ForgotPass()
+    private function forgotPassword()
     {
         $this->runThis('forgot.php');
     }
 
-    protected function UserEdit()
+    private function UserEdit()
     {
-        $message = '';
         $userModel = new UserModel();
         $user = $userModel->takeUserData($_SESSION['user_id']);
+
+        $message = '';
         if (isset($_SESSION['message'])) {
             $message = $_SESSION['message'];
             unset($_SESSION['message']);
         }
+
         $this->runThis('edit-user.php', ['user' => $user, 'message' => $message]);
     }
 
-    protected function UserEditSubmit()
+    private function UserEditSubmit()
     {
         $userModel = new UserModel();
 
@@ -48,7 +50,7 @@ class UserController extends Controller
 
     }
 
-    protected function Login()
+    private function Login()
     {
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
@@ -66,7 +68,7 @@ class UserController extends Controller
         }
     }
 
-    protected function Register()
+    private function Register()
     {
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
@@ -90,8 +92,8 @@ class UserController extends Controller
 
         }
     }
-
-    protected function ForgotPassSubmit()
+    
+    private function ForgotPassSubmit(): void
     {
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
@@ -101,11 +103,11 @@ class UserController extends Controller
         $saveNewPass = $forget->ForgottenPass($email, $password, $passwordConfirm);
         if ($saveNewPass) {
             $message = 'Password has been changed successfully.';
-            $this->runThis('login.php', ['message' => $message]);
         } else {
             $message = 'Incorrect Email or Passwords doesnt match!';
-            $this->runThis('forgot.php', ['message' => $message]);
         }
+
+        $this->runThis('login.php', ['message' => $message]);
     }
 
 
