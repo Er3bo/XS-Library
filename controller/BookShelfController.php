@@ -5,7 +5,7 @@ class BookShelfController extends Controller {
         if ($_SESSION['userLogInStatus']) {
             $books = new BookShelfModel();
             $books = $books->getBooks();
-            $this->runThis('dashboard.php', $books);
+            $this->runThis('dashboard.php', ['books'=>$books]);
         }
     }
 }

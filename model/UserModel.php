@@ -1,8 +1,6 @@
 <?php
-class UserModel extends Model {
-    public function Index(){
-        return;
-    }
+class UserModel extends Model
+{
     public function CheckUserLogin($email, $password)
     {
         $query = "SELECT * FROM user WHERE email=:email";
@@ -17,11 +15,13 @@ class UserModel extends Model {
                     $_SESSION['user_role'] = 'user';
                 }
                 $_SESSION['user_id'] = $userData['id'];
+                var_dump('test');
                 return true;
             } else if($userData['active'] == 0) {
                 $_SESSION['message'] = 'Account is not approved by admin';
                 return false;
             } else {
+                $_SESSION['message'] = 'Incorrect Email or password!';
                 return false;
             }
         } else {
@@ -29,4 +29,48 @@ class UserModel extends Model {
         }
     }
 
+    public function UserRegister($email, $password, $firstName, $lastNAme)
+    {
+        $query = "INSERT INTO user (first_name, last_name, email, password) VALUES (:firstName, :lastName, :email, :password)";
+
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':firstName', $firstName);
+            $stmt->bindParam(':lastName', $lastNAme);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':password', $password);
+            $stmt->execute();
+
+            return 1;
+        } catch (PDOException $e) {
+            if ($e->getCode() == '23000') {
+                "The email address $email is already in use. Please choose a different email address.";
+            } else {
+                "An error occurred: " . $e->getMessage();
+            }
+            return 0;
+        }
+    }
+
+    public function ForgottenPass($email, $password, $passwordConfirm)
+    {
+        if ($password == $passwordConfirm) {
+            $query = "SELECT * FROM user WHERE email=:email";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute(['email' => $email]);
+            $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($userData) {
+                $hashedPass = password_hash($password, PASSWORD_DEFAULT);
+                $queryUpdate = "UPDATE user SET password =:password WHERE id = :id";
+                $stmt = $this->db->prepare($queryUpdate);
+                $stmt->bindParam(':password', $hashedPass);
+                $stmt->bindParam(':id', $userData['id']);
+                $stmt->execute();
+                return true;
+            } else
+                return false;
+        }
+        return false;
+    }
 }

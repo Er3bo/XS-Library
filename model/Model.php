@@ -9,7 +9,8 @@
 abstract class Model{
     protected $db = false;
 
-    public function  __construct() {
+    public function  __construct()
+    {
         try {
             $config = include('config.php');
             if (!$this->db) {

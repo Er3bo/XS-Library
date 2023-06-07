@@ -9,7 +9,6 @@ class IndexController extends Controller
 {
     protected function Index()
     {
-        $viewmodel = new IndexModel();
         $this->runThis('login.php');
     }
 }
