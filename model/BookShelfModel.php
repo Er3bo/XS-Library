@@ -1,6 +1,6 @@
 <?php
 class BookShelfModel extends Model {
-    public function getBooks()
+    public function getBooks(): array
     {
         $query = "SELECT * FROM books ";
         $stmt = $this->db->prepare($query);
@@ -16,7 +16,7 @@ class BookShelfModel extends Model {
         return $books;
     }
 
-    public function getSingleBook($id)
+    public function getSingleBook($id): array
     {
         $query = "SELECT * FROM books WHERE id=:id";
         $stmt = $this->db->prepare($query);

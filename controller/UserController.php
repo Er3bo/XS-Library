@@ -2,17 +2,21 @@
 
 class UserController extends Controller
 {
-    private function index()
+    private function index(): bool
     {
         $this->runThis('registration.php');
+
+        return true;
     }
 
-    private function forgotPassword()
+    private function forgotPassword(): bool
     {
         $this->runThis('forgot.php');
+
+        return true;
     }
 
-    private function userEdit()
+    private function userEdit(): bool
     {
         $userModel = new UserModel();
         $user = $userModel->takeUserData($_SESSION['user_id']);
@@ -24,9 +28,11 @@ class UserController extends Controller
         }
 
         $this->runThis('edit-user.php', ['user' => $user, 'message' => $message]);
+
+        return true;
     }
 
-    private function userEditSubmit()
+    private function userEditSubmit(): bool
     {
         $userModel = new UserModel();
 
@@ -48,9 +54,10 @@ class UserController extends Controller
             exit;
         }
 
+        return true;
     }
 
-    private function login()
+    private function login(): bool
     {
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
@@ -66,9 +73,11 @@ class UserController extends Controller
             unset($_SESSION['message']);
             $this->runThis('login.php', ['message'=>$message]);
         }
+
+        return true;
     }
 
-    private function register()
+    private function register(): bool
     {
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
@@ -89,11 +98,12 @@ class UserController extends Controller
         } else {
             $message = 'Your Email is already registered.';
             $this->runThis('registration.php', ['message'=>$message]);
-
         }
+
+        return true;
     }
     
-    private function forgotPassSubmit(): void
+    private function forgotPassSubmit(): bool
     {
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
@@ -108,6 +118,8 @@ class UserController extends Controller
         }
 
         $this->runThis('login.php', ['message' => $message]);
+
+        return true;
     }
 
 

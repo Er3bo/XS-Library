@@ -1,7 +1,7 @@
 <?php
 class UserModel extends Model
 {
-    public function checkUserLogin($email, $password)
+    public function checkUserLogin($email, $password): bool
     {
         $query = "SELECT * FROM user WHERE email=:email";
         $stmt = $this->db->prepare($query);
@@ -33,7 +33,7 @@ class UserModel extends Model
         }
     }
 
-    public function userRegister($email, $password, $firstName, $lastNAme)
+    public function userRegister($email, $password, $firstName, $lastNAme): bool
     {
         $query = "INSERT INTO user (first_name, last_name, email, password) VALUES (:firstName, :lastName, :email, :password)";
 
@@ -47,7 +47,7 @@ class UserModel extends Model
 
             $stmt->execute();
 
-            return 1;
+            return true;
 
         } catch (PDOException $e) {
             if ($e->getCode() == '23000') {
@@ -55,11 +55,12 @@ class UserModel extends Model
             } else {
                 "An error occurred: " . $e->getMessage();
             }
-            return 0;
+
+            return false;
         }
     }
 
-    public function forgottenPass($email, $password, $passwordConfirm)
+    public function forgottenPass($email, $password, $passwordConfirm): bool
     {
         if ($password == $passwordConfirm) {
             $query = "SELECT * FROM user WHERE email=:email";
@@ -79,22 +80,21 @@ class UserModel extends Model
 
                 return true;
             } else {
+
                 return false;
             }
         }
         return false;
     }
 
-    public function takeUserData($id)
+    public function takeUserData($id): array
     {
         $query = "SELECT * FROM user WHERE id=:id";
         $stmt = $this->db->prepare($query);
 
         $stmt->execute(['id' => $id]);
 
-        $userData = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        return $userData;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function updateUserData(string $firstName, $lastName, $email, $password, $passwordConfirm): bool
@@ -116,6 +116,7 @@ class UserModel extends Model
 
             return true;
         } else {
+
             return false;
         }
     }

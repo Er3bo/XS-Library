@@ -1,14 +1,16 @@
 <?php
 class AdminController extends Controller
 {
-    private function userList()
+    private function userList(): bool
     {
         $nonActiveUsers = new AdminModel;
         $data = $nonActiveUsers->notActiveUsers();
         $this->runThis('users.php', ['data'=>$data]);
+
+        return true;
     }
 
-    private function userApprove()
+    private function userApprove(): bool
     {
         $user_id = $_POST['user_id'];
 
@@ -19,9 +21,11 @@ class AdminController extends Controller
             header('Location: ?users');
             exit;
         }
+
+        return true;
     }
 
-    private function createBookForm()
+    private function createBookForm(): bool
     {
         $message = '';
         if (isset($_SESSION['message'])) {
@@ -29,9 +33,11 @@ class AdminController extends Controller
             unset($_SESSION['message']);
         }
         $this->runThis('edit-book.php', ['message' => $message]);
+
+        return true;
     }
 
-    private function createBookFormSubmit()
+    private function createBookFormSubmit(): bool
     {
         $id = $_POST['book_create'];
         $title = trim($_POST['title']);
@@ -68,9 +74,11 @@ class AdminController extends Controller
             header('Location: ?book_create');
             exit;
         }
+
+        return true;
     }
 
-    private function editBookForm()
+    private function editBookForm(): bool
     {
         $message = '';
         if (isset($_SESSION['message'])) {
@@ -78,11 +86,13 @@ class AdminController extends Controller
             unset($_SESSION['message']);
         }
         $singleBookData = new BookShelfModel();
-        $book = $singleBookData->getsingleBook($_POST['book_edit']);
+        $book = $singleBookData->getSingleBook($_POST['book_edit']);
         $this->runThis('edit-book.php', ['book' => $book, 'message' => $message]);
+
+        return true;
     }
 
-    private function deleteBook()
+    private function deleteBook(): bool
     {
         $book = $_POST['book_delete'];
         $model = new AdminModel();
@@ -91,5 +101,7 @@ class AdminController extends Controller
             header('Location: ?dashboard');
             exit;
         }
+
+        return true;
     }
 }

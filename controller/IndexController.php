@@ -7,14 +7,18 @@
  */
 class IndexController extends Controller
 {
-    private function index()
+    private function index(): bool
     {
         $this->runThis('login.php');
+
+        return true;
     }
 
-    private function logOut()
+    private function logOut(): bool
     {
         unset($_SESSION['userLogInStatus']);
         $this->runThis('login.php');
+
+        return true;
     }
 }

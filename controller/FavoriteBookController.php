@@ -1,13 +1,16 @@
 <?php
 class FavoriteBookController extends Controller
 {
-    private function favoriteList()
+    private function favoriteList(): bool
     {
         $modelBooks = new FavoriteBooksModel();
         $favBooks = $modelBooks->favoriteBooks();
         $this->runThis('favorite.php', ['favoriteBooks' => $favBooks]);
+
+        return true;
     }
-    private function RemoveFavorite()
+
+    private function RemoveFavorite(): bool
     {
         $modelBooks = new FavoriteBooksModel();
         $favBooks = $modelBooks->removeFavorite($_POST['remove_favorite']);
@@ -19,9 +22,11 @@ class FavoriteBookController extends Controller
             $message = 'Couldn\'t update list';
             $this->runThis('favorite.php', ['message' => $message]);
         }
+
+        return true;
     }
 
-    private function AddToFavorite()
+    private function AddToFavorite(): bool
     {
         $book = $_GET['add-favorite'];
         $model = new FavoriteBooksModel();
@@ -34,5 +39,7 @@ class FavoriteBookController extends Controller
             $message = 'Book is already in your favorite list!';
             $this->runThis('favorite.php', ['message' => $message]);
         }
+
+        return true;
     }
 }
