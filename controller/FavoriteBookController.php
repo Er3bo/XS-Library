@@ -1,7 +1,7 @@
 <?php
 class FavoriteBookController extends Controller
 {
-    private function FavoriteList()
+    private function favoriteList()
     {
         $modelBooks = new FavoriteBooksModel();
         $favBooks = $modelBooks->favoriteBooks();

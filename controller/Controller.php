@@ -2,12 +2,10 @@
 
 abstract class Controller
  {
-    private $request;
     private $action;
 
     public function __construct($action, $request) {
         $this->action = $action;
-        $this->request = $request;
     }
 
     public function executeAction() {

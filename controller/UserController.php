@@ -2,7 +2,7 @@
 
 class UserController extends Controller
 {
-    private function Index()
+    private function index()
     {
         $this->runThis('registration.php');
     }
@@ -12,7 +12,7 @@ class UserController extends Controller
         $this->runThis('forgot.php');
     }
 
-    private function UserEdit()
+    private function userEdit()
     {
         $userModel = new UserModel();
         $user = $userModel->takeUserData($_SESSION['user_id']);
@@ -26,7 +26,7 @@ class UserController extends Controller
         $this->runThis('edit-user.php', ['user' => $user, 'message' => $message]);
     }
 
-    private function UserEditSubmit()
+    private function userEditSubmit()
     {
         $userModel = new UserModel();
 
@@ -50,12 +50,12 @@ class UserController extends Controller
 
     }
 
-    private function Login()
+    private function login()
     {
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
         $checkLogin = new UserModel();
-        $checkLogin = $checkLogin->CheckUserLogin($email, $password);
+        $checkLogin = $checkLogin->checkUserLogin($email, $password);
 
         if ($checkLogin) {
             $_SESSION['userLogInStatus'] = 1;
@@ -68,7 +68,7 @@ class UserController extends Controller
         }
     }
 
-    private function Register()
+    private function register()
     {
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
@@ -76,10 +76,10 @@ class UserController extends Controller
         $lastName = trim($_POST['lastName']);
 
         $reg = new UserModel();
-        $userReg = $reg->UserRegister($email, password_hash($password, PASSWORD_DEFAULT), $firstName, $lastName);
+        $userReg = $reg->userRegister($email, password_hash($password, PASSWORD_DEFAULT), $firstName, $lastName);
 
         if ($userReg) {
-            $checkLogin = $reg->CheckUserLogin($email, $password);
+            $checkLogin = $reg->checkUserLogin($email, $password);
             if ($checkLogin) {
                 $_SESSION['userLogInStatus'] = 1;
             } else {
@@ -93,14 +93,14 @@ class UserController extends Controller
         }
     }
     
-    private function ForgotPassSubmit(): void
+    private function forgotPassSubmit(): void
     {
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
         $passwordConfirm = trim($_POST['passwordConfirm']);
 
         $forget = new UserModel();
-        $saveNewPass = $forget->ForgottenPass($email, $password, $passwordConfirm);
+        $saveNewPass = $forget->forgottenPass($email, $password, $passwordConfirm);
         if ($saveNewPass) {
             $message = 'Password has been changed successfully.';
         } else {
