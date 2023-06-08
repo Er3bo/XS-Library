@@ -16,7 +16,7 @@ class BookShelfModel extends Model {
         return $books;
     }
 
-    public function getSingleBook($id): array
+    public function getSingleBook(int $id): array
     {
         $query = "SELECT * FROM books WHERE id=:id";
         $stmt = $this->db->prepare($query);

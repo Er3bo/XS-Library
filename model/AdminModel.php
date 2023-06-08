@@ -13,7 +13,7 @@ class AdminModel extends Model
         return $userData;
     }
 
-    public function updateUserStatus($user_id): bool
+    public function updateUserStatus(int $user_id): bool
     {
         $query = "UPDATE user SET active = '1' WHERE id = :id";
         $stmt = $this->db->prepare($query);
@@ -23,7 +23,7 @@ class AdminModel extends Model
         return true;
     }
 
-    public function updateBook($id, $name, $isbn, $description, $image): bool
+    public function updateBook(int $id, string $name, string $isbn, string $description, string $image): bool
     {
         if ($id) {
             $query = "UPDATE books SET name = :name, ISBN = :isbn, description = :descr, image = :image WHERE id = :id;";
@@ -54,7 +54,7 @@ class AdminModel extends Model
         return false;
     }
 
-    function validateISBN($isbn): bool
+    function validateISBN(string $isbn): bool
     {
         // Remove any hyphens or spaces from the ISBN
         $isbn = str_replace(array('-', ' '), '', $isbn);
@@ -92,7 +92,7 @@ class AdminModel extends Model
         return true;
     }
 
-    public function deleteBook($id): bool
+    public function deleteBook(int $id): bool
     {
         $query = "SELECT * FROM books WHERE id=:id";
         $stmt = $this->db->prepare($query);

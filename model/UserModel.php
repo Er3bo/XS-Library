@@ -1,7 +1,7 @@
 <?php
 class UserModel extends Model
 {
-    public function checkUserLogin($email, $password): bool
+    public function checkUserLogin(string $email, string $password): bool
     {
         $query = "SELECT * FROM user WHERE email=:email";
         $stmt = $this->db->prepare($query);
@@ -33,7 +33,7 @@ class UserModel extends Model
         }
     }
 
-    public function userRegister($email, $password, $firstName, $lastNAme): bool
+    public function userRegister(string $email, string $password, string $firstName, string $lastNAme): bool
     {
         $query = "INSERT INTO user (first_name, last_name, email, password) VALUES (:firstName, :lastName, :email, :password)";
 
@@ -60,7 +60,7 @@ class UserModel extends Model
         }
     }
 
-    public function forgottenPass($email, $password, $passwordConfirm): bool
+    public function forgottenPass(string $email, string $password, string $passwordConfirm): bool
     {
         if ($password == $passwordConfirm) {
             $query = "SELECT * FROM user WHERE email=:email";
@@ -87,7 +87,7 @@ class UserModel extends Model
         return false;
     }
 
-    public function takeUserData($id): array
+    public function takeUserData(int $id): array
     {
         $query = "SELECT * FROM user WHERE id=:id";
         $stmt = $this->db->prepare($query);
@@ -97,7 +97,7 @@ class UserModel extends Model
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updateUserData(string $firstName, $lastName, $email, $password, $passwordConfirm): bool
+    public function updateUserData(string $firstName, string $lastName, string $email, string $password, string $passwordConfirm): bool
     {
         $user = $_SESSION['user_id'];
 

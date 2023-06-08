@@ -4,7 +4,7 @@ abstract class Controller
  {
     private $action;
 
-    public function __construct($action)
+    public function __construct(string $action)
     {
         $this->action = $action;
     }
@@ -22,7 +22,7 @@ abstract class Controller
      *
      * @return void
      */
-    protected function runThis($view, array $data = []): bool
+    protected function runThis(string $view, array $data = []): bool
     {
         extract($data);
 

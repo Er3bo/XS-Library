@@ -1,6 +1,6 @@
 <?php
 class FavoriteBooksModel extends Model {
-    public function getFavoriteBooks($id): array
+    public function getFavoriteBooks(int $id): array
     {
         $query = "SELECT * FROM books WHERE id=:id";
         $stmt = $this->db->prepare($query);
@@ -12,7 +12,7 @@ class FavoriteBooksModel extends Model {
         return $book;
     }
 
-    public function isItInFavorite($book_id): bool
+    public function isItInFavorite(int $book_id): bool
     {
         $user = $_SESSION['user_id'];
 
@@ -33,7 +33,7 @@ class FavoriteBooksModel extends Model {
         }
     }
 
-    public function addToFavorite($book_id): bool
+    public function addToFavorite(int $book_id): bool
     {
         $user = $_SESSION['user_id'];
         $query = "INSERT INTO favorite_book (user_id, book_id) VALUES (:user_id, :book_id)";
@@ -59,7 +59,7 @@ class FavoriteBooksModel extends Model {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function removeFavorite($id): bool
+    public function removeFavorite(int $id): bool
     {
         $user = $_SESSION['user_id'];
         $query = "DELETE FROM favorite_book WHERE book_id = :book_id AND user_id = :user_id";

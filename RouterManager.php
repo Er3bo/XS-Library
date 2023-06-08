@@ -5,7 +5,7 @@ class RouterManager
     private $controller;
     private $action;
 
-    public function __construct($request)
+    public function __construct(string $request)
     {
         $routes = require('routes.php');
         if (array_key_exists($request, $routes)) {
