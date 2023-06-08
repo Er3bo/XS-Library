@@ -1,5 +1,13 @@
 <?php
-class FavoriteBooksModel extends Model {
+class FavoriteBooksModel extends Model
+{
+    /**
+     * Get the list of all favorite books for the user
+     *
+     * @param int $id
+     *
+     * @return array
+     */
     public function getFavoriteBooks(int $id): array
     {
         $query = "SELECT * FROM books WHERE id=:id";
@@ -7,11 +15,16 @@ class FavoriteBooksModel extends Model {
 
         $stmt->execute(['id' => $id]);
 
-        $book = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        return $book;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Check is this book already in your favorite list
+     *
+     * @param int $book_id
+     *
+     * @return bool
+     */
     public function isItInFavorite(int $book_id): bool
     {
         $user = $_SESSION['user_id'];
@@ -33,6 +46,13 @@ class FavoriteBooksModel extends Model {
         }
     }
 
+    /**
+     * Add the book to user favList
+     *
+     * @param int $book_id
+     *
+     * @return bool
+     */
     public function addToFavorite(int $book_id): bool
     {
         $user = $_SESSION['user_id'];
@@ -47,6 +67,11 @@ class FavoriteBooksModel extends Model {
         return true;
     }
 
+    /**
+     * Get all favBooks of user
+     *
+     * @return array
+     */
     public function favoriteBooks(): array
     {
         $user = $_SESSION['user_id'];
@@ -59,6 +84,14 @@ class FavoriteBooksModel extends Model {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Remove a book from user favorite list
+     *
+     * @param int $id
+     *
+     *
+     * @return bool
+     */
     public function removeFavorite(int $id): bool
     {
         $user = $_SESSION['user_id'];

@@ -1,6 +1,11 @@
 <?php
 class AdminController extends Controller
 {
+    /**
+     * Users for approval
+     *
+     * @return bool
+     */
     private function userList(): bool
     {
         $nonActiveUsers = new AdminModel;
@@ -10,6 +15,11 @@ class AdminController extends Controller
         return true;
     }
 
+    /**
+     * Submit which user to be approved
+     *
+     * @return bool
+     */
     private function userApprove(): bool
     {
         $user_id = $_POST['user_id'];
@@ -25,6 +35,11 @@ class AdminController extends Controller
         return true;
     }
 
+    /**
+     * Show us the form for new book
+     *
+     * @return bool
+     */
     private function createBookForm(): bool
     {
         $message = '';
@@ -37,6 +52,11 @@ class AdminController extends Controller
         return true;
     }
 
+    /**
+     * Save form for new book
+     *
+     * @return bool
+     */
     private function createBookFormSubmit(): bool
     {
         $id = $_POST['book_create'];
@@ -78,6 +98,11 @@ class AdminController extends Controller
         return true;
     }
 
+    /**
+     * Make changes to already created book
+     *
+     * @return bool
+     */
     private function editBookForm(): bool
     {
         $message = '';
@@ -92,6 +117,11 @@ class AdminController extends Controller
         return true;
     }
 
+    /**
+     * Delete book from db
+     *
+     * @return bool
+     */
     private function deleteBook(): bool
     {
         $book = $_POST['book_delete'];

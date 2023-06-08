@@ -1,5 +1,10 @@
 <?php
 class BookShelfModel extends Model {
+    /**
+     * Get all the books to list them
+     *
+     * @return array
+     */
     public function getBooks(): array
     {
         $query = "SELECT * FROM books ";
@@ -16,6 +21,13 @@ class BookShelfModel extends Model {
         return $books;
     }
 
+    /**
+     * Give info for only one book
+     *
+     * @param int $id
+     *
+     * @return array
+     */
     public function getSingleBook(int $id): array
     {
         $query = "SELECT * FROM books WHERE id=:id";

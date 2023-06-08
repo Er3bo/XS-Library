@@ -1,6 +1,14 @@
 <?php
 class UserModel extends Model
 {
+    /**
+     * Check is it valid user, is it verified, is it admin or user.
+     *
+     * @param string $email
+     * @param string $password
+     *
+     * @return bool
+     */
     public function checkUserLogin(string $email, string $password): bool
     {
         $query = "SELECT * FROM user WHERE email=:email";
@@ -33,6 +41,16 @@ class UserModel extends Model
         }
     }
 
+    /**
+     * Register new user/add new user to db
+     *
+     * @param string $email
+     * @param string $password
+     * @param string $firstName
+     * @param string $lastNAme
+     *
+     * @return bool
+     */
     public function userRegister(string $email, string $password, string $firstName, string $lastNAme): bool
     {
         $query = "INSERT INTO user (first_name, last_name, email, password) VALUES (:firstName, :lastName, :email, :password)";
@@ -60,6 +78,15 @@ class UserModel extends Model
         }
     }
 
+    /**
+     * Change the password if email is valid and registered.
+     *
+     * @param string $email
+     * @param string $password
+     * @param string $passwordConfirm
+     *
+     * @return bool
+     */
     public function forgottenPass(string $email, string $password, string $passwordConfirm): bool
     {
         if ($password == $passwordConfirm) {
@@ -87,6 +114,13 @@ class UserModel extends Model
         return false;
     }
 
+    /**
+     * Take user current data
+     *
+     * @param int $id
+     *
+     * @return array
+     */
     public function takeUserData(int $id): array
     {
         $query = "SELECT * FROM user WHERE id=:id";
@@ -97,6 +131,17 @@ class UserModel extends Model
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Update users data.
+     *
+     * @param string $firstName
+     * @param string $lastName
+     * @param string $email
+     * @param string $password
+     * @param string $passwordConfirm
+     *
+     * @return bool
+     */
     public function updateUserData(string $firstName, string $lastName, string $email, string $password, string $passwordConfirm): bool
     {
         $user = $_SESSION['user_id'];

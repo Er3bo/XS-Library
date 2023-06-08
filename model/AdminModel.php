@@ -1,6 +1,11 @@
 <?php
 class AdminModel extends Model
 {
+    /**
+     * Returns array of not activated Users
+     *
+     * @return array
+     */
     public function notActiveUsers(): array
     {
         $query = "SELECT * FROM user WHERE active=0";
@@ -13,6 +18,13 @@ class AdminModel extends Model
         return $userData;
     }
 
+    /**
+     * Update the user status from non-active to active
+     *
+     * @param int $user_id
+     *
+     * @return bool
+     */
     public function updateUserStatus(int $user_id): bool
     {
         $query = "UPDATE user SET active = '1' WHERE id = :id";
@@ -23,6 +35,17 @@ class AdminModel extends Model
         return true;
     }
 
+    /**
+     * Edit already created book
+     *
+     * @param int $id
+     * @param string $name
+     * @param string $isbn
+     * @param string $description
+     * @param string $image
+     *
+     * @return bool
+     */
     public function updateBook(int $id, string $name, string $isbn, string $description, string $image): bool
     {
         if ($id) {
@@ -54,6 +77,13 @@ class AdminModel extends Model
         return false;
     }
 
+    /**
+     * Check if the edited or created ISBN of a book is valid
+     *
+     * @param string $isbn
+     *
+     * @return bool
+     */
     function validateISBN(string $isbn): bool
     {
         // Remove any hyphens or spaces from the ISBN
@@ -92,6 +122,13 @@ class AdminModel extends Model
         return true;
     }
 
+    /**
+     * Basically, it deletes the book
+     *
+     * @param int $id
+     *
+     * @return bool
+     */
     public function deleteBook(int $id): bool
     {
         $query = "SELECT * FROM books WHERE id=:id";

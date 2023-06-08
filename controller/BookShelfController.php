@@ -2,6 +2,11 @@
 
 class BookShelfController extends Controller
 {
+    /**
+     * List of all books
+     *
+     * @return bool
+     */
     private function dashboard(): bool
     {
         $books = new BookShelfModel();
@@ -11,6 +16,11 @@ class BookShelfController extends Controller
         return true;
     }
 
+    /**
+     * Show us the book page
+     *
+     * @return bool
+     */
     private function singleBook(): bool
     {
         $books = new BookShelfModel();

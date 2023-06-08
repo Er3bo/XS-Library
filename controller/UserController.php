@@ -2,6 +2,11 @@
 
 class UserController extends Controller
 {
+    /**
+     * Registration form
+     *
+     * @return bool
+     */
     private function index(): bool
     {
         $this->runThis('registration.php');
@@ -9,6 +14,11 @@ class UserController extends Controller
         return true;
     }
 
+    /**
+     * Forgot password form
+     *
+     * @return bool
+     */
     private function forgotPassword(): bool
     {
         $this->runThis('forgot.php');
@@ -16,6 +26,11 @@ class UserController extends Controller
         return true;
     }
 
+    /**
+     * Edit user personal info
+     *
+     * @return bool
+     */
     private function userEdit(): bool
     {
         $userModel = new UserModel();
@@ -32,6 +47,11 @@ class UserController extends Controller
         return true;
     }
 
+    /**
+     * Save edited changes of user personal info
+     *
+     * @return bool
+     */
     private function userEditSubmit(): bool
     {
         $userModel = new UserModel();
@@ -57,6 +77,11 @@ class UserController extends Controller
         return true;
     }
 
+    /**
+     * Login the user into the site
+     *
+     * @return bool
+     */
     private function login(): bool
     {
         $email = trim($_POST['email']);
@@ -77,6 +102,11 @@ class UserController extends Controller
         return true;
     }
 
+    /**
+     * Register new user form
+     *
+     * @return bool
+     */
     private function register(): bool
     {
         $email = trim($_POST['email']);
@@ -102,7 +132,12 @@ class UserController extends Controller
 
         return true;
     }
-    
+
+    /**
+     * Save new password for the user
+     *
+     * @return bool
+     */
     private function forgotPassSubmit(): bool
     {
         $email = trim($_POST['email']);

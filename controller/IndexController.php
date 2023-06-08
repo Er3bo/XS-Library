@@ -7,6 +7,11 @@
  */
 class IndexController extends Controller
 {
+    /**
+     * Login page
+     *
+     * @return bool
+     */
     private function index(): bool
     {
         $this->runThis('login.php');
@@ -14,6 +19,11 @@ class IndexController extends Controller
         return true;
     }
 
+    /**
+     * Logout user and return to login page
+     *
+     * @return bool
+     */
     private function logOut(): bool
     {
         unset($_SESSION['userLogInStatus']);

@@ -1,6 +1,11 @@
 <?php
 class FavoriteBookController extends Controller
 {
+    /**
+     * List of all books in user favorite list
+     *
+     * @return bool
+     */
     private function favoriteList(): bool
     {
         $modelBooks = new FavoriteBooksModel();
@@ -10,6 +15,11 @@ class FavoriteBookController extends Controller
         return true;
     }
 
+    /**
+     * Remove a book from user favorite list
+     *
+     * @return bool
+     */
     private function RemoveFavorite(): bool
     {
         $modelBooks = new FavoriteBooksModel();
@@ -26,6 +36,11 @@ class FavoriteBookController extends Controller
         return true;
     }
 
+    /**
+     * Add book to favorite book
+     *
+     * @return bool
+     */
     private function AddToFavorite(): bool
     {
         $book = $_GET['add-favorite'];
